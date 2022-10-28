@@ -117,7 +117,8 @@ docker image ls 		# 查看所有已经下载的镜像
 
 比如我们要删除我们下载的 mysql 镜像。
 
-通过 `docker rmi [image]` （等价于`docker image rm [image]`）删除镜像之前首先要确保这个镜像没有被容器引用（可以通过标签名称或者镜像 ID删除）。通过我们前面讲的` docker ps`命令即可查看。
+通过 `docker rmi [image]` （等价于`docker image rm [image]`）删除镜像之前首先要确保这个镜像没有被容器引用（可以通过标签名称或者镜像 ID删除）。通过我们前面讲的` docker ps`
+命令即可查看。
 
 ```sh
 ➜  ~ docker ps

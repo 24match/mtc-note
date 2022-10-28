@@ -10,20 +10,21 @@ eg：启动main函数就是启动了一个JVM进程，main函数所在的线程�
 
 ### 线程
 
-线程是比进程更小的执行单位。一个进程在执行过程中可以产生多个线程。与进程不同的时同类的多个线程共享进程的<b>堆</b>和<b>方法区</b>资源，但每个线程都有自己的程序计数器、虚拟机栈和本地方法栈，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。
+线程是比进程更小的执行单位。一个进程在执行过程中可以产生多个线程。与进程不同的时同类的多个线程共享进程的<b>堆</b>和<b>方法区</b>
+资源，但每个线程都有自己的程序计数器、虚拟机栈和本地方法栈，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。
 
 ```java
 public class MultiThread {
-	public static void main(String[] args) {
-		// 获取 Java 线程管理 MXBean
-		ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
-		// 不需要获取同步的 monitor 和 synchronizer 信息，仅获取线程和线程堆栈信息
-		ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(false, false);
-		// 遍历线程信息，仅打印线程 ID 和线程名称信息
-		for (ThreadInfo threadInfo : threadInfos) {
-			System.out.println("[" + threadInfo.getThreadId() + "] " + threadInfo.getThreadName());
-		}
-	}
+    public static void main(String[] args) {
+        // 获取 Java 线程管理 MXBean
+        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+        // 不需要获取同步的 monitor 和 synchronizer 信息，仅获取线程和线程堆栈信息
+        ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(false, false);
+        // 遍历线程信息，仅打印线程 ID 和线程名称信息
+        for (ThreadInfo threadInfo : threadInfos) {
+            System.out.println("[" + threadInfo.getThreadId() + "] " + threadInfo.getThreadName());
+        }
+    }
 }
 ```
 
@@ -32,9 +33,9 @@ public class MultiThread {
 ```console
 [5] Attach Listener 	//添加事件
 [4] Signal Dispatcher 	//分发处理给 JVM 信号的线程
-[3] Finalizer 			//调用对象 finalize 方法的线程
+[3] Finalizer 		//调用对象 finalize 方法的线程
 [2] Reference Handler 	//清除 reference 线程
-[1] main 				//main 线程,程序入口
+[1] main 		//main 线程,程序入口
 ```
 
 **一个 Java 程序的运行是 main 线程和多个其他线程同时运行**
@@ -89,16 +90,12 @@ public class MultiThread {
 
 #### 线程的生命周期和状态
 
-| 状态名称     | 说明                                                         |
-| ------------ | ------------------------------------------------------------ |
-| NEW          | 初始状态，线程被构建，但是还没有调用start()方法              |
-| RUNNABLE     | 运行状态，Java线程将操作系统中的就绪和运行两种状态笼统地称作“运行中” |
-| BLOCKED      | 阻塞状态，表示线程阻塞于锁                                   |
+| 状态名称         | 说明                                          |
+|--------------|---------------------------------------------|
+| NEW          | 初始状态，线程被构建，但是还没有调用start()方法                 |
+| RUNNABLE     | 运行状态，Java线程将操作系统中的就绪和运行两种状态笼统地称作“运行中”       |
+| BLOCKED      | 阻塞状态，表示线程阻塞于锁                               |
 | WAITING      | 等待状态，表示线程进入等待状态，进入该状态表示当前线程需要等待其他线程做出一些特定动作 |
-| TIME_WAITING | 超时等待状态，该状态不同于WAITING，它是可以在指定时间自行返回的 |
+| TIME_WAITING | 超时等待状态，该状态不同于WAITING，它是可以在指定时间自行返回的         |
 | TERMINATED   | 终止状态，表示当前线程已经执行完毕                           |
-
-
-
-
 

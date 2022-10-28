@@ -54,6 +54,7 @@ Mybatis使用RowBounds对象进行分页，它是针对ResultSet结果集执行�
 insert方法总是会返回一个int值，这个值代表的是插入的行数。
 
 ```xml
+
 <insert id="xxxx" usergeneratekeys="true" keyproperty="id">
 	insert into names (name) values (#{name})
 </insert>
@@ -73,7 +74,9 @@ Mybatis仅支持association关联对象和collection关联集合对象的延迟�
 
 > 在Mybatis配置文件中，可以配置是否启用延迟加载lazyLoadingEnabled=true|false。
 
-**实现原理**：使用<kbd>CGLIB</kbd>创建目标对象的代理对象，当调用目标方法时，进入拦截器方法，比如调用<kbd>a.getB().getName()</kbd>，拦截器<kbd>invoke()</kbd>方法发现a.getB()是null值，那么就会单独发送事先保存好的查询关联B对象的sql，把B查询上来，然后调用<kbd>a.setB(b)</kbd>，于是a的对象b属性就有值了，接着完成<kbd>a.getB().getName()</kbd>方法的调用。这就是延迟加载的基本原理。
+**实现原理**：使用<kbd>CGLIB</kbd>创建目标对象的代理对象，当调用目标方法时，进入拦截器方法，比如调用<kbd>a.getB().getName()</kbd>，拦截器<kbd>invoke()</kbd>
+方法发现a.getB()是null值，那么就会单独发送事先保存好的查询关联B对象的sql，把B查询上来，然后调用<kbd>a.setB(b)</kbd>，于是a的对象b属性就有值了，接着完成<kbd>a.getB()
+.getName()</kbd>方法的调用。这就是延迟加载的基本原理。
 
 ### Mybatis的一级、二级缓存
 
@@ -105,7 +108,8 @@ Mybatis仅支持association关联对象和collection关联集合对象的延迟�
 
 ### 简述Mybatis的插件运行原理，以及如何编写一个插件
 
-Mybatis仅可以编写针对ParameterHandler、ResultSetHandler、StatementHandler、Executor这4种接口的插件，Mybatis使用JDK的动态代理，为需要拦截的接口生成代理对象以实现接口方法拦截功能，每当执行这4种接口对象的方法时，就会进入拦截方法，具体就是InvocationHandler的invoke()方法，当然，只会拦截那些你指定需要拦截的方法。
+Mybatis仅可以编写针对ParameterHandler、ResultSetHandler、StatementHandler、Executor这4种接口的插件，Mybatis使用JDK的动态代理，为需要拦截的接口生成代理对象以实现接口方法拦截功能，每当执行这4种接口对象的方法时，就会进入拦截方法，具体就是InvocationHandler的invoke()
+方法，当然，只会拦截那些你指定需要拦截的方法。
 
 编写插件：实现Mybatis的Interceptor接口并复写intercept()方法，然后在给插件编写注解，指定要拦截哪一个接口的哪些方法即可，记住，别忘了在配置文件中配置你编写的插件。
 
