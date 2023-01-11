@@ -100,8 +100,8 @@ $ firewall-cmd --reload
 ```sh
 docker version 		# 查看docker版本
 docker images 		# 查看已经下载的镜像
-docker container ls # 查看所有容器
-docker ps 			# 查看正在运行的容器
+docker container ls     # 查看所有容器
+docker ps 		# 查看正在运行的容器
 docker image prune 	# 清理临时的，没有被使用的镜像文件 -a, --all: 删除所有没有用的镜像，而不仅仅是临时文件；
 ```
 
@@ -110,7 +110,7 @@ docker image prune 	# 清理临时的，没有被使用的镜像文件 -a, --all
 ```sh
 docker search mysql 	# 查看mysql相关镜像
 docker pull mysql:5.7 	# 拉去mysql镜像
-docker image ls 		# 查看所有已经下载的镜像
+docker image ls 	# 查看所有已经下载的镜像
 ```
 
 3. 删除镜像

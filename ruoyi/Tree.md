@@ -57,16 +57,18 @@ public class TreeUtils {
             map.put("children", dirChild(dir.getDirId()));
         }
     }
-
+}
 ```
 
-###  控制器调用
+### 控制器调用
+
 ```java
+public class Tree {
     @GetMapping("/treeSelect")
     public AjaxResult treeSelect(HhDwgDir hhDwgDir) {
 
-        TreeUtils dirTree = new TreeUtils();
-        List<HhDwgDir> list = hhDwgDirService.selectHhDwgDirList(hhDwgDir);
+        TreeUtils      dirTree = new TreeUtils();
+        List<HhDwgDir> list    = hhDwgDirService.selectHhDwgDirList(hhDwgDir);
 
         // 用于拷贝的list
         List<HhDwgDir> copyList = new ArrayList<>();
@@ -86,39 +88,40 @@ public class TreeUtils {
             copyList.add(dwgDir);
         }
     }
-
+}
 ```
 
 ### 最终生成结果(json)
+
 ```json
 {
-    "msg": "操作成功",
-    "code": 200,
-    "data": [
+  "msg": "操作成功",
+  "code": 200,
+  "data": [
+    {
+      "id": 200,
+      "label": "xx",
+      "children": [
         {
-            "id": 200,
-            "label": "xx",
-            "children": [
-                {
-                    "id": 202,
-                    "label": "xx"
-                },
-                {
-                    "id": 203,
-                    "label": "xx"
-                },
-            ]
+          "id": 202,
+          "label": "xx"
         },
         {
-            "id": 208,
-            "label": "TEST",
-            "children": [
-                {
-                    "id": 209,
-                    "label": "1122"
-                }
-            ]
+          "id": 203,
+          "label": "xx"
         }
-    ]
+      ]
+    },
+    {
+      "id": 208,
+      "label": "TEST",
+      "children": [
+        {
+          "id": 209,
+          "label": "1122"
+        }
+      ]
+    }
+  ]
 }
 ```

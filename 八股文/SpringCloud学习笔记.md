@@ -16,7 +16,9 @@
 + Leadership election and cluster state，Leader选举和集群状态
 + Distributed message，分布式消息
 
-Spring Cloud并不是Spring团队全新研发的框架，它只是把一些比较优秀的解决微服务架构中常见问题的开源框架基于Spring Cloud规范进行了整合，通过Spring Boot这个框架进行再次封装后屏蔽掉了复杂的配置，给开发者提供良好的开箱即用的微服务开发体验。不难看出，Spring Cloud其实就是一套规范，而Spring Cloud Netflix、Spring Cloud Consul、Spring Cloud Alibaba才是Spring Cloud规范的实现。
+Spring Cloud并不是Spring团队全新研发的框架，它只是把一些比较优秀的解决微服务架构中常见问题的开源框架基于Spring Cloud规范进行了整合，通过Spring
+Boot这个框架进行再次封装后屏蔽掉了复杂的配置，给开发者提供良好的开箱即用的微服务开发体验。不难看出，Spring Cloud其实就是一套规范，而Spring Cloud Netflix、Spring Cloud
+Consul、Spring Cloud Alibaba才是Spring Cloud规范的实现。
 
 ## 版本简介
 
@@ -52,18 +54,21 @@ IoC(控制反转)把对象的生命周期委托到Spring容器中，而反转指
 DI（Dependency Inject），依赖注入，在IoC容器运行期间，动态地把某种依赖关系注入组件中。
 
 ```java
-ApplicationContext context = new FileSystemXmlApplicationContext("...")
-User user = context.getBean(User.class);
-UserDetail userDetail = user.getUserDetail();
+public class DITest {
+    ApplicationContext context    = new FileSystemXmlApplicationContext("...");
+    User               user       = context.getBean(User.class);
+    UserDetail         userDetail = user.getUserDetail();
+}
 ```
 
 只需要在Spring的配置文件中描述Bean之间的依赖关系
 
 ```xml
+
 <bean id="user" class="User">
-	<property name="userDetail" ref="userDetail" />
+	<property name="userDetail" ref="userDetail"/>
 </bean>
-<bean id="userDetail" class="UserDetail" />
+<bean id="userDetail" class="UserDetail"/>
 ```
 
 实现依赖的方式有三种，接口注入，构造方法注入和setter方法注入
@@ -79,6 +84,7 @@ Java Config只需要使用@Configuration等同于XML的配置形式
 通过@Bean注解将一个对象注入IoC容器中
 
 ```java
+
 @Configuration
 public class SpringConfigClass {
     @Bean
@@ -113,9 +119,11 @@ public class SpringConfigClass {
 自动装配在Spring Boot中通过@EnableAutoConfiguration注解来开启，这个注解的启动在启动类注解@SpringBootApplication内
 
 ```java
+
 @SpringBootApplication
 public class SpringBootApplication() {
-    pulbic static void main(String[]agrs) {
+
+    static void main(String[] args) {
         SpringApplication.run(SpringBootApplication.class);
     }
 }
